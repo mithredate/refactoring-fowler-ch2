@@ -50,5 +50,32 @@ class Movie
         return $this->_title;
     }
 
+    /**
+     * @param $days
+     *
+     * @return float|int
+     */
+    public function getCharge($days)
+    {
+        $result = 0;
+        switch ($this->getPriceCode()) {
+            case Movie::REGULAR:
+                $result += 2;
+                if ($days > 2) {
+                    $result += ($days - 2) * 1.5;
+                }
+                break;
+            case Movie::NEW_RELEASE:
+                $result += $days * 3;
+                break;
+            case Movie::CHILDREN:
+                $result += 1.5;
+                if ($days > 3) {
+                    $result += ($days - 3) * 1.5;
+                }
+                break;
+        }
 
+        return $result;
+    }
 }
