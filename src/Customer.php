@@ -42,7 +42,7 @@ class Customer
         for ($i = 0; $i < sizeof($this->_rentals); $i++) {
             $each = $this->_rentals[$i];
 
-            $thisAmount = $this->amountFor($each);
+            $thisAmount = $each->getCharge();
 
             // add frequent renter points
             $frequentRenterPoints ++;
@@ -62,15 +62,5 @@ class Customer
         $result .= "Amount owed is {$totalAmount} \n";
         $result .= "You earned {$frequentRenterPoints} frequent renter points";
         return $result;
-    }
-
-    /**
-     * @param $aRental
-     *
-     * @return float|int
-     */
-    private function amountFor(Rental $aRental)
-    {
-        return $aRental->getCharge();
     }
 }
