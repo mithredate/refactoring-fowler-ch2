@@ -36,7 +36,6 @@ class Customer
 
     public function statement()
     {
-        $totalAmount = 0;
         $frequentRenterPoints = 0;
         $result = "Rental Record for {$this->getName()} \n";
         for ($i = 0; $i < sizeof($this->_rentals); $i++) {
@@ -46,12 +45,20 @@ class Customer
 
             // show figure for this rental
             $result .= "\t {$each->getMovie()->getTitle()} \t {$each->getCharge()} \n";
-            $totalAmount += $each->getCharge();
         }
 
         //add footer lines
-        $result .= "Amount owed is {$totalAmount} \n";
+        $result .= "Amount owed is {$this->getTotalCharge()} \n";
         $result .= "You earned {$frequentRenterPoints} frequent renter points";
         return $result;
+    }
+
+    private function getTotalCharge()
+    {
+        $totalAmount = 0;
+        foreach ($this->_rentals as $each) {
+            $totalAmount += $each->getCharge();
+        }
+        return $totalAmount;
     }
 }
