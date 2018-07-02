@@ -18,7 +18,7 @@ class CustomerStatementTest extends \PHPUnit\Framework\TestCase
         $customer->addRental($rental);
 
         $this->assertEquals(
-            "Rental Record for John Doe \n\t Dances with the wolves \t 2 \nAmount owed is 0 \nYou earned 1 frequent renter points",
+            "Rental Record for John Doe \n\t Dances with the wolves \t 2 \nAmount owed is 2 \nYou earned 1 frequent renter points",
             $customer->statement()
         );
     }
@@ -32,7 +32,7 @@ class CustomerStatementTest extends \PHPUnit\Framework\TestCase
         $customer->addRental($rental);
 
         $this->assertEquals(
-            "Rental Record for John Doe \n\t Dances with the wolves \t 6.5 \nAmount owed is 0 \nYou earned 1 frequent renter points",
+            "Rental Record for John Doe \n\t Dances with the wolves \t 6.5 \nAmount owed is 6.5 \nYou earned 1 frequent renter points",
             $customer->statement()
         );
     }
@@ -56,7 +56,7 @@ class CustomerStatementTest extends \PHPUnit\Framework\TestCase
         $customer2->addRental(new Rental($movie4, 3));
         $customer2->addRental(new Rental($movie6, 1));
 
-        $this->assertEquals("Rental Record for Customer 1 \n	 Movie 1 	 6.5 \n	 Movie 3 	 2 \n	 Movie 5 	 18 \nAmount owed is 0 \nYou earned 4 frequent renter points", $customer1->statement());
-        $this->assertEquals("Rental Record for Customer 2 \n	 Movie 2 	 10.5 \n	 Movie 4 	 9 \n	 Movie 6 	 1.5 \nAmount owed is 0 \nYou earned 4 frequent renter points", $customer2->statement());
+        $this->assertEquals("Rental Record for Customer 1 \n	 Movie 1 	 6.5 \n	 Movie 3 	 2 \n	 Movie 5 	 18 \nAmount owed is 26.5 \nYou earned 4 frequent renter points", $customer1->statement());
+        $this->assertEquals("Rental Record for Customer 2 \n	 Movie 2 	 10.5 \n	 Movie 4 	 9 \n	 Movie 6 	 1.5 \nAmount owed is 21 \nYou earned 4 frequent renter points", $customer2->statement());
     }
 }
