@@ -42,8 +42,6 @@ class Customer
         for ($i = 0; $i < sizeof($this->_rentals); $i++) {
             $each = $this->_rentals[$i];
 
-            $thisAmount = $each->getCharge();
-
             // add frequent renter points
             $frequentRenterPoints ++;
             // add bonus for a two doy new release rental
@@ -55,8 +53,8 @@ class Customer
             }
 
             // show figure for this rental
-            $result .= "\t {$each->getMovie()->getTitle()} \t $thisAmount \n";
-            $totalAmount += $thisAmount;
+            $result .= "\t {$each->getMovie()->getTitle()} \t {$each->getCharge()} \n";
+            $totalAmount += $each->getCharge();
         }
 
         //add footer lines
