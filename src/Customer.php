@@ -40,13 +40,13 @@ class Customer
         $frequentRenterPoints = 0;
         $result = "Rental Record for {$this->getName()} \n";
         for ($i = 0; $i < sizeof($this->_rentals); $i++) {
-            $each = $this->_rentals[$i];
             $thisAmount = 0;
+            $each = $this->_rentals[$i];
 
             switch ($each->getMovie()->getPriceCode()) {
                 case Movie::REGULAR:
                     $thisAmount += 2;
-                    if($each->getDaysRented() > 2) {
+                    if ($each->getDaysRented() > 2) {
                         $thisAmount += ($each->getDaysRented() - 2) * 1.5;
                     }
                     break;
@@ -55,7 +55,7 @@ class Customer
                     break;
                 case Movie::CHILDREN:
                     $thisAmount += 1.5;
-                    if($each->getDaysRented() > 3) {
+                    if ($each->getDaysRented() > 3) {
                         $thisAmount += ($each->getDaysRented() - 3) * 1.5;
                     }
                     break;
