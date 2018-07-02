@@ -40,26 +40,9 @@ class Customer
         $frequentRenterPoints = 0;
         $result = "Rental Record for {$this->getName()} \n";
         for ($i = 0; $i < sizeof($this->_rentals); $i++) {
-            $thisAmount = 0;
             $each = $this->_rentals[$i];
 
-            switch ($each->getMovie()->getPriceCode()) {
-                case Movie::REGULAR:
-                    $thisAmount += 2;
-                    if ($each->getDaysRented() > 2) {
-                        $thisAmount += ($each->getDaysRented() - 2) * 1.5;
-                    }
-                    break;
-                case Movie::NEW_RELEASE:
-                    $thisAmount += $each->getDaysRented() * 3;
-                    break;
-                case Movie::CHILDREN:
-                    $thisAmount += 1.5;
-                    if ($each->getDaysRented() > 3) {
-                        $thisAmount += ($each->getDaysRented() - 3) * 1.5;
-                    }
-                    break;
-            }
+            $thisAmount = $this->amountFor($each);
 
             // add frequent renter points
             $frequentRenterPoints ++;
@@ -80,4 +63,33 @@ class Customer
         $result .= "You earned {$frequentRenterPoints} frequent renter points";
         return $result;
     }
+
+    /**
+     * @param $each
+     *
+     * @return float|int
+     */
+    private function amountFor(Rental $each)
+    {
+        $thisAmount = 0;
+        switch ($each->getMovie()->getPriceCode()) {
+            case Movie::REGULAR:
+                $thisAmount += 2;
+                if ($each->getDaysRented() > 2) {
+                    $thisAmount += ($each->getDaysRented() - 2) * 1.5;
+                }
+                break;
+            case Movie::NEW_RELEASE:
+                $thisAmount += $each->getDaysRented() * 3;
+                break;
+            case Movie::CHILDREN:
+                $thisAmount += 1.5;
+                if ($each->getDaysRented() > 3) {
+                    $thisAmount += ($each->getDaysRented() - 3) * 1.5;
+                }
+                break;
+        }
+
+        return $thisAmount;
+}
 }
