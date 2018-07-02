@@ -45,7 +45,7 @@ class Customer
 
         //add footer lines
         $result .= "Amount owed is {$this->getTotalCharge()} \n";
-        $result .= "You earned {$this->getFrequentRenterPoints()} frequent renter points";
+        $result .= "You earned {$this->getTotalFrequentRenterPoints()} frequent renter points";
         return $result;
     }
 
@@ -58,7 +58,7 @@ class Customer
         return $result;
     }
 
-    private function getFrequentRenterPoints()
+    private function getTotalFrequentRenterPoints()
     {
         $result = 0;
         foreach ($this->_rentals as $aRental) {
