@@ -1,0 +1,17 @@
+{
+    "name": "rdsysco/refactoring",
+    "description": "Practicing refactoring",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mehrdad Hedayati",
+            "email": "mehrdad.hedayati@rdsysco.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^7.2"
+    },
+    "autoload": {
+        "classmap": ["./"]
+    }
+}
