@@ -13,6 +13,7 @@ class Movie
 
     private $_title;
     private $_priceCode;
+    private $_price;
 
     /**
      * Movie constructor.
@@ -23,7 +24,7 @@ class Movie
     public function __construct($title, $priceCode)
     {
         $this->_title = $title;
-        $this->_priceCode = $priceCode;
+        $this->setPriceCode($priceCode);
     }
 
     /**
@@ -31,7 +32,7 @@ class Movie
      */
     public function getPriceCode()
     {
-        return $this->_priceCode;
+        return $this->_price->getPriceCode();
     }
 
     /**
@@ -40,6 +41,19 @@ class Movie
     public function setPriceCode($priceCode)
     {
         $this->_priceCode = $priceCode;
+        switch ($priceCode) {
+            case Movie::REGULAR:
+                $this->_price = new RegularPrice();
+                break;
+            case Movie::NEW_RELEASE:
+                $this->_price = new NewReleasePrice();
+                break;
+            case Movie::CHILDREN:
+                $this->_price = new ChildrenPrice();
+                break;
+            default:
+                throw new InvalidArgumentException("Incorrect Price Code");
+        }
     }
 
     /**
