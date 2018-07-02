@@ -65,4 +65,18 @@ class Rental
         return $result;
     }
 
+    public function getFrequentRenterPoints()
+    {
+        $result = 1;
+        // add bonus for a two doy new release rental
+        if(
+            $this->getMovie()->getPriceCode() == Movie::NEW_RELEASE &&
+            $this->getDaysRented() > 1
+        ) {
+            $result++;
+        }
+
+        return $result;
+    }
+
 }
